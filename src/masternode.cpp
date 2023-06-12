@@ -1033,19 +1033,3 @@ void CMasternodePing::Relay()
     CInv inv(MSG_MASTERNODE_PING, GetHash());
     g_connman->RelayInv(inv);
 }
-
-UniValue getcollateral(const JSONRPCRequest& request)
-{
-    if (request.fHelp || (request.params.size() != 0))
-        throw std::runtime_error(
-            "getcollateral\n"
-            "\nPrint the amount of coins currently required as a masternode collateral\n"
-
-            "\nResult:\n"
-            "\"status\"     (numeric) Masternode collateral value right now\n"
-
-            "\nExamples:\n" +
-            HelpExampleCli("getcollateral", "") + HelpExampleRpc("getcollateral", ""));
-
-    return ValueFromAmount(CMasternode::GetMasternodeNodeCollateral(chainActive.Height()));
-}
